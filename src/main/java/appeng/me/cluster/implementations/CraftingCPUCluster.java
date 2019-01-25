@@ -26,6 +26,7 @@ import java.util.LinkedList;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import appeng.util.item.AESharedNBT;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 
@@ -749,6 +750,9 @@ public final class CraftingCPUCluster implements IAECluster, ICraftingCPU
 
 							for( final IAEItemStack out : details.getCondensedOutputs() )
 							{
+								if (out.hasTagCompound() && out.getTagCompound().toString().contains("gt.tank")) {
+									continue;
+								}
 								this.postChange( out, this.machineSrc );
 								this.waitingFor.add( out.copy() );
 								this.postCraftingStatusChange( out.copy() );
